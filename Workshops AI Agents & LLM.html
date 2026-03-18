@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Workshops AI Agents & LLM - IEEE CS PUCP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #eaeaea;
+            color: #1a1a1a;
+            padding: 20px;
+        }
+
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        a {
+            color: #38bdf8;
+            text-decoration: none;
+            border-bottom: 1px dotted #38bdf8;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #818cf8;
+            border-bottom-color: #818cf8;
+        }
+
+        /* ════════════════════════════════════════ */
+        /*  DOCUMENT CONTAINER                     */
+        /* ════════════════════════════════════════ */
+        #documento-pdf {
+            width: 8.5in;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            padding: 0.8in 0.8in;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-content {
+            flex: 1;
+        }
+
+        /* ════════════════════════════════════════ */
+        /*  COVER                                  */
+        /* ════════════════════════════════════════ */
+        .cover-page {
+            padding: 0.8in 0.8in 0.8in;
+            width: 8.5in;
+            min-height: 11in;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .cover-bar {
+            border-bottom: 2.5px solid #1a1a1a;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .cover-bar .org {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .cover-bar .dtype {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #777;
+        }
+
+        .cover-center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .cover-center .year {
+            font-family: 'Inter', sans-serif;
+            font-size: 80px;
+            font-weight: 800;
+            letter-spacing: -4px;
+            line-height: 1;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .cover-center h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+        }
+
+        .cover-center .sub {
+            font-family: 'Crimson Pro', serif;
+            font-size: 19px;
+            font-weight: 400;
+            color: #555;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 28px;
+        }
+
+        .cover-center .tag {
+            font-size: 12px;
+            font-weight: 500;
+            color: #1a1a1a;
+            letter-spacing: 0.3px;
+            padding: 14px 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            line-height: 1.6;
+        }
+
+        .cover-bottom {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 2.5px solid #1a1a1a;
+            padding-top: 16px;
+        }
+
+        .cm-item { padding-right: 20px; }
+        .cm-item:not(:last-child) { border-right: 1px solid #ddd; }
+        .cm-item:not(:first-child) { padding-left: 20px; }
+
+        .cm-item .lbl {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 3px;
+        }
+
+        .cm-item .val {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* ════════════════════════════════════════ */
+        /*  PAGE HEADERS & FOOTERS                 */
+        /* ════════════════════════════════════════ */
+        .pg-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 28px;
+            font-size: 9px;
+            font-weight: 500;
+            color: #aaa;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .pg-footer {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 24px;
+            font-size: 9px;
+            color: #bbb;
+        }
+        .pg-footer .num { font-weight: 700; color: #999; }
+
+        /* ════════════════════════════════════════ */
+        /*  SECTION TITLES                         */
+        /* ════════════════════════════════════════ */
+        .sec-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .sec-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 27px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .sec-sub {
+            font-size: 12.5px;
+            color: #777;
+            margin-bottom: 24px;
+            line-height: 1.55;
+        }
+
+        hr.thick { border: none; border-top: 2.5px solid #1a1a1a; margin: 24px 0; }
+
+        /* ════════════════════════════════════════ */
+        /*  CALLOUT / HIGHLIGHT BOXES              */
+        /* ════════════════════════════════════════ */
+        .callout {
+            background: #f7f7f7;
+            border-left: 4px solid #1a1a1a;
+            padding: 14px 18px;
+            margin: 14px 0 18px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .callout h5 {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            color: #1a1a1a;
+        }
+
+        .callout p {
+            font-size: 11px;
+            color: #555;
+            line-height: 1.65;
+        }
+
+        .callout.info {
+            border-left-color: #1a1a1a;
+            background: #f5f5f5;
+        }
+
+        /* ════════════════════════════════════════ */
+        /*  TABLES                                 */
+        /* ════════════════════════════════════════ */
+        .mood-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0 18px;
+            font-size: 10.5px;
+        }
+
+        .mood-table thead th {
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 9px 12px;
+            text-align: left;
+        }
+
+        .mood-table tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #1a1a1a;
+            color: #444;
+            line-height: 1.5;
+            vertical-align: top;
+        }
+
+        .mood-table tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        /* ════════════════════════════════════════ */
+        /*  CONTENT ITEMS (ev)                     */
+        /* ════════════════════════════════════════ */
+        .ev {
+            margin-bottom: 20px;
+            padding-left: 18px;
+            border-left: 3px solid #1a1a1a;
+        }
+
+        .ev-badge {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fff;
+            background: #1a1a1a;
+            padding: 2px 10px;
+            border-radius: 3px;
+            margin-bottom: 6px;
+        }
+
+        .ev h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            line-height: 1.35;
+        }
+
+        .ev p {
+            font-size: 11.5px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* ════════════════════════════════════════ */
+        /*  PRINT                                  */
+        /* ════════════════════════════════════════ */
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+            body { background: #fff !important; padding: 0; margin: 0; }
+            #documento-pdf { width: 100% !important; margin: 0; box-shadow: none; }
+            .page {
+                width: 100% !important;
+                min-height: auto !important;
+                height: auto !important;
+                page-break-after: auto;
+                page-break-inside: auto;
+                overflow: visible !important;
+                display: block !important;
+            }
+            .cover-page {
+                width: 100% !important;
+                min-height: 100vh !important;
+                page-break-after: always;
+                display: flex !important;
+            }
+            .ev, .callout, .mood-table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="documento-pdf">
+
+        <!-- PORTADA -->
+        <div class="cover-page">
+            <div class="cover-bar">
+                <span class="org">IEEE CS PUCP — Workshops AI</span>
+                <span class="dtype">Programa Oficial de Capacitación</span>
+            </div>
+
+            <div class="cover-center">
+                <div class="year">2026</div>
+                <h1>Workshops AI Agents & LLM</h1>
+                <p class="sub">Guía de Preparación y Temario Oficial — Arquitecturas, prompts, y herramientas asíncronas</p>
+                <p class="tag">
+                    Python 3.10+ &nbsp;·&nbsp; Llama 3.3 70B &nbsp;·&nbsp; NVIDIA Nemotron 120B &nbsp;·&nbsp; Node.js &nbsp;·&nbsp; RAG
+                </p>
+            </div>
+
+            <div class="cover-bottom">
+                <div class="cm-item">
+                    <div class="lbl">Versión</div>
+                    <div class="val">Marzo 2026</div>
+                </div>
+                <div class="cm-item">
+                    <div class="lbl">Requisito</div>
+                    <div class="val">Estricto / Obligatorio</div>
+                </div>
+                <div class="cm-item">
+                    <div class="lbl">Organizador</div>
+                    <div class="val">IEEE Computer Society</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="page">
+            <div class="page-content">
+                <div class="pg-header">
+                    <span>Workshops AI Agents & LLM</span>
+                    <span>Guía de Preparación</span>
+                </div>
+
+                <div class="sec-label">Sección 01</div>
+                <div class="sec-title">Requisitos Previos</div>
+                <div class="sec-sub">Para aprovechar al máximo este workshop, es de carácter obligatorio contar con las siguientes herramientas instaladas y configuradas antes de la sesión.</div>
+
+                <table class="mood-table">
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Requisito</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Hardware</strong></td>
+                            <td>Básico</td>
+                            <td>Conexión a Internet estable y computadora personal.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IDE</strong></td>
+                            <td><a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a></td>
+                            <td>Instalado y configurado; se recomiendan extensiones de Python.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lenguaje</strong></td>
+                            <td><a href="https://www.python.org/downloads/" target="_blank">Python 3.10+</a></td>
+                            <td>Instalado en el sistema operativo y añadido al PATH.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IA Tool</strong></td>
+                            <td><a href="https://antigravity.google/" target="_blank">Antigravity (Google Deepmind)</a></td>
+                            <td>Debe estar instalado y actualizado a la última versión disponible.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cuentas</strong></td>
+                            <td><a href="https://mail.google.com/" target="_blank">Gmail</a> y <a href="https://web.telegram.org/" target="_blank">Telegram</a></td>
+                            <td>Acceso a la cuenta personal de Gmail y cliente de Telegram activo.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Software Extra</strong></td>
+                            <td><a href="https://get.adobe.com/reader/" target="_blank">Lector PDF</a></td>
+                            <td>Visor estándar instalado en el sistema.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr class="thick">
+
+                <div class="sec-label">Sección 02</div>
+                <div class="sec-title">Agenda del Workshop</div>
+                <div class="sec-sub">A lo largo de las sesiones, aprenderemos a construir sistemas de IA desde la base hasta despliegues complejos con herramientas.</div>
+
+                <div class="ev">
+                    <span class="ev-badge">Módulo 01</span>
+                    <h4>Fundamentos LLM</h4>
+                    <p>Diferencias arquitectónicas entre modelos (NVIDIA Nemotron vs Llama 3.3). Estructuración y manejo avanzado de prompts del sistema.</p>
+                </div>
+
+                <div class="ev">
+                    <span class="ev-badge">Módulo 02</span>
+                    <h4>Conexión con APIs</h4>
+                    <p>Uso de lenguajes como Python y Node.js para consumir Large Language Models utilizando SDKs estándar (compatibles con OpenAI).</p>
+                </div>
+
+                <div class="ev">
+                    <span class="ev-badge">Módulo 03</span>
+                    <h4>AI Agent Basic (Telegram)</h4>
+                    <p>Creación de un bot nativo de manera asíncrona. Implementación de memoria corta conversacional y manejo de configuraciones vía entorno `.env`.</p>
+                </div>
+
+                <div style="page-break-before: always; margin-top: 40px;"></div>
+                
+                <div class="ev">
+                    <span class="ev-badge">Módulo 04</span>
+                    <h4>Persistencia de Datos</h4>
+                    <p>Mecanismos para almacenar historiales de conversaciones individualizadas en formato JSON, guardando el progreso de manera local.</p>
+                </div>
+
+                <div class="ev">
+                    <span class="ev-badge">Módulo 05</span>
+                    <h4>AI Agent Web</h4>
+                    <p>Construcción de una interfaz visual web minimalista empleando Vanilla JS en el Frontend y un servidor Express como proxy en el Backend.</p>
+                </div>
+
+                <div class="ev">
+                    <span class="ev-badge">Módulo 06</span>
+                    <h4>AI Agent Intermediate</h4>
+                    <p>Introducción al uso de Herramientas extensibles (Tool Calling), bases de datos y la integración de RAG para la lectura eficiente de archivos PDF.</p>
+                </div>
+
+            </div>
+            
+            <div class="pg-footer">
+                <span>IEEE CS PUCP</span>
+                <span class="num">02</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

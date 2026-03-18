@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEEE CS PUCP | AI Agent Web</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="chat-container">
+    <header class="chat-header">
+      <div class="header-info">
+        <h1>Agent Web Básico</h1>
+        <p>Potenciado por NVIDIA Nemotron 3</p>
+      </div>
+      <button id="resetBtn" class="reset-btn">Limpiar Memoria</button>
+    </header>
+
+    <div id="chatBox" class="chat-box">
+      <div class="message assistant">
+        <div class="msg-content">¡Hola! Soy el agente IA de demostración web. ¿En qué te ayudo hoy?</div>
+      </div>
+    </div>
+
+    <form id="chatForm" class="chat-input-area">
+      <input type="text" id="userInput" placeholder="Escribe un mensaje..." autocomplete="off" required>
+      <button type="submit" id="sendBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
